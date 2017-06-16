@@ -2,14 +2,14 @@
 
 // Configuration
 let port = 3000;
-let wwwroot = "wwwroot";
+const wwwroot = __dirname + "/wwwroot";
 
 // Import modules
 let express = require("express");
 let app = express();
 
-app.get('/', function (req, res) {
-  res.sendFile(wwwroot + "/" + req.uri);
+app.get("*", function (req, res) {
+  res.sendFile(req.url, {root: wwwroot});
 })
 
 app.listen(3000, function () {
