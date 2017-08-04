@@ -1,2 +1,5 @@
 # nodejs-server
-Simple nodejs server using express
+Simple NodeJS server using express
+Written in TypeScript
+
+

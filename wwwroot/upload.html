@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+    <head>
+        <script>
+            function upload() {
+                // Upload uri
+                let url = "upload";
+
+                // Get file and create formData object
+                let input = document.getElementById("file");
+                let file = input.files[0];
+                let formData = new FormData();
+
+                // append file to formData
+                formData.append("file", file);
+
+                // Create AJAX request
+                let xhr = new XMLHttpRequest();
+
+                // after finish log something
+                xhr.onreadystatechange = function(e) {
+                    if ( 4 == this.readyState ) {
+                        console.log("xhr upload complete");
+                    }
+                };
+
+                // draw process of upload to page
+                xhr.upload.onprogress = function(ev) {
+                    uploadInfo(ev.loaded, ev.total);
+                };
+
+                // open connection
+                xhr.open("post", url, true);
+                
+                // send data
+                xhr.send(formData);
+            }
+
+            function uploadInfo(done, total) {
+                var percentComplete = parseInt((done / total) * 100);
+                var msg = [];
+                if (percentComplete === 100) {
+                    msg.push("Upload done!");
+                } else {
+                    msg.push("Uploading... ");
+                }
+                msg.push(done + "/" + total + " B (" + percentComplete + "%)");
+                document.getElementById("msg").innerHTML = msg.join("<br/>");
+            }
+        </script>
+    </head>
+    <body>
+        Upload
+
+        <input id="file" type="file">
+        <button onclick="upload();">Upload file</button>
+        <div id="msg"><div>
+    </body>
+</html>
