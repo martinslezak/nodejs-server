@@ -10,6 +10,13 @@ let express = require("express");
 var path = require('path');
 let app = express();
 
+// Enable CORS
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "*");
+  next();
+});
+
 // Create controllers
 let uploadController = new FileUploadCtrl();
 
