@@ -10,6 +10,10 @@ class FileUploadCtrl extends controller_base_1.Controller {
     upload(target, req, res) {
         let form = new formidable.IncomingForm();
         let filesArr = [];
+        form.on("error", (err) => {
+            console.log("FORM ERROR");
+            console.log("Error: " + err.message);
+        });
         form.parse(req /*, function(err, fields, files) {
             if (files) {
                 let arr = [];
